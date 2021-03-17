@@ -87,20 +87,46 @@ function MetaData_build(selection){
         //Plot bar chart
           // Plot the chart to a div tag with id "bar"
             Plotly.newPlot("bar", bar_data, bar_layout);
+
+        
+        
+        
+        ///bubble chart
+
+        ///Data for Bubble Chart
+        
+        var bubble_data = [
+            {
+              x: otu_ids,
+              y: sample_values,
+              text: otu_labels,
+              mode: 'markers',
+              marker: {
+                size: sample_values,
+                color: otu_ids
+              }
+    
+            }
+          ];
+        // Layout for the bubble chart
+        var bubble_layout = {
+        title: "Top 10 Bacteria Cultures Found"
+        
+        }
+        Plotly.newPlot("bubble", bubble_data, bubble_layout);
+
+
+
+        }
+        )
+
+
+
+
+
+
+
   
-
-
-
-    }
-    )
-
-
-
-
-
-
-
-    ///bubble chart
 
 
 /// event handler for the drop down changes
