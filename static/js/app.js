@@ -33,15 +33,20 @@ function MetaData_build(selection){
             
         });
 
+        ///Bonus 
+        //Gather wfreq data
+        const wfreq = selected_metadata[0].wfreq;
+        Gauge_plotter(wfreq);
+
+
     }
     )
 }
 
 
 
-
 ///build charts function
-
+function Charts_Builder(selection){
     /// call data to populate charts
     d3.json("data/samples.json").then((incomingData)  => {
         console.log(incomingData);
@@ -52,7 +57,7 @@ function MetaData_build(selection){
         console.log(user_selection);
 
         ///Filter sampledata on a given id assigned to user_selection
-        var selected_sampledata = sampledata.filter(rows => rows.id == user_selection);
+        var selected_sampledata = sampledata.filter(rows => rows.id == selection);
         console.log(selected_sampledata);
 
         ///Gather top 10 entries
@@ -117,24 +122,41 @@ function MetaData_build(selection){
 
 
 
-        }
-        )
-
-
-
-
-
-
-
-  
+    }
+    )
+};   
 
 
 /// event handler for the drop down changes
 
+
+
 ////init function
+
+function init(){
+    //populate dropdown
+
+    d3.json("samples.json").then(function(data){
+        data.names.forEach(function(id){
+    
+        //select dropdown
+        d3.select("#selDataset").append("option").text(id).property("value");
+        });
+        Charts_Builder(data.names[0]);
+        MetaData_build(data.names[0]);
+        });
+};
+
+
 
 // on option changes
 
+function optionChanged(selection){
+    MetaData_build(selection);
+    Charts_Builder(selection);
+    
+}
+
 
 ///call init function
-//init();
+init();
