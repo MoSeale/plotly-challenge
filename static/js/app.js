@@ -52,16 +52,16 @@ function MetaData_build(selection){
         console.log(user_selection);
 
         ///Filter sampledata on a given id assigned to user_selection
-        var selected_sampledata = sampledata.filter(row => row.id == user_selection);
+        var selected_sampledata = sampledata.filter(rows => rows.id == user_selection);
         console.log(selected_sampledata);
 
         ///Gather top 10 entries
 
-        var otu_ids = selected_sampledata.otu_ids;
+        var otu_ids = selected_sampledata[0].otu_ids;
 
-        console.log(otu_ids);
-        var otu_labels = selected_sampledata.otu_labels;
-        var sample_values = selected_sampledata.sample_values;
+        //console.log(otu_ids);
+        var otu_labels = selected_sampledata[0].otu_labels;
+        var sample_values = selected_sampledata[0].sample_values;
 
 
         ///bar chart
@@ -85,26 +85,9 @@ function MetaData_build(selection){
         };
 
         //Plot bar chart
-          // Plot the chart to a div tag with id "bar-plot"
-            Plotly.newPlot("bar-plot", bar_data, bar_layout);
+          // Plot the chart to a div tag with id "bar"
+            Plotly.newPlot("bar", bar_data, bar_layout);
   
-
-
-
-
-        // var bar_chart = [
-        //     {
-
-                
-        //       y: otu_ids.slice(0,10).reverse(),
-        //       x: sample_values.slice(0,10).reverse(),
-        //       text: otu_labels.slice(0,10).reverse(),
-        //       type: "bar",
-        //       orientation: "h",
-        //     }
-        //   ];
-        
-        //   console.log(bar_chart);
 
 
 
